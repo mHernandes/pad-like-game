@@ -11,12 +11,14 @@ class Flipper:
 		# Gets the screen's rect to match the flipper's rect
 		self.screen_rect = self.screen.get_rect()
 
-		# Flipper's size
+		# Flipper's size and positioning
 		self.flipper_size = (self.flipper_width, self.flipper_height) = (100, 20)
 		self.flipper = pygame.Surface(self.flipper_size)
 		self.rect = self.flipper.get_rect()
-		# Matches the flipper's rect to the screen's rect
-		self.rect.midbottom = self.screen_rect.midbottom
+		# Matches the center of the flipper's rect to the center of screen's rect
+		self.rect.center = self.screen_rect.center
+		# Positions the flipper at 0.8 * screen height down below
+		self.rect.y = 650
 
 
 	def blitme(self):

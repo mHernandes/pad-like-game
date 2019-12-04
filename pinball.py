@@ -1,5 +1,5 @@
 """
-Created the settings module as refactoring, created the flipper module
+Created the check_events() and update_screen() methods in pinball.py. Added movement to the flipper for left and right arrows
 """
 
 
@@ -21,18 +21,33 @@ class Game:
 		self.flipper = Flipper(self)
 
 
+	def check_events(self):
+		""" Checks for key presses """
+		for event in pygame.event.get():
+			if event.type == pygame.QUIT:
+				sys.exit()
+			elif event.type == pygame.KEYDOWN:
+				if event.key == pygame.K_RIGHT:
+					self.flipper.rect.x += 1.5
+				elif event.key == pygame.K_LEFT:
+					self.flipper.rect.x -= 1.5
+
+
+	def update_screen(self):
+		""" Updates screen """
+		# Fill screen with color
+		self.screen.fill(self.settings.screen_color)
+		# Blits the flipper on screen
+		self.flipper.blitme()
+		# Update the full display Surface to the screen
+		pygame.display.flip()
+
+
 	def run_game(self):
 		""" Main loop of the game """
 		while True:
-			for event in pygame.event.get():
-				if event.type == pygame.QUIT:
-					sys.exit()
-			# Fill screen with color
-			self.screen.fill(self.settings.screen_color)
-			# Blits the flipper on screen
-			self.flipper.blitme()
-			# Update the full display Surface to the screen
-			pygame.display.flip()
+			self.check_events()
+			self.update_screen()
 
 
 def main():
