@@ -28,9 +28,9 @@ class Game:
 				sys.exit()
 			elif event.type == pygame.KEYDOWN:
 				if event.key == pygame.K_RIGHT:
-					self.flipper.rect.x += 1.5
+					self.flipper.rect.x += self.settings.flipper_speed
 				elif event.key == pygame.K_LEFT:
-					self.flipper.rect.x -= 1.5
+					self.flipper.rect.x -= self.settings.flipper_speed
 
 
 	def update_screen(self):
