@@ -5,6 +5,3 @@ class Settings:
 		self.screen_size = (self.screen_width, self.screen_height) = (1200, 700)
 		self.screen_color = (255, 255, 255)
 		self.screen_caption = "Pinball"
-
-		# Flipper speed
-		self.flipper_speed = 1.5
