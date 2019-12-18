@@ -1,11 +1,12 @@
 """
-Created the check_events() and update_screen() methods in pinball.py. Added movement to the flipper for left and right arrows
+
 """
 
 
 import sys, pygame
 from flipper import Flipper
 from settings import Settings
+from ball import Ball
 
 
 class Game:
@@ -19,6 +20,8 @@ class Game:
 		pygame.display.set_caption(self.settings.screen_caption)
 		# Creates a Flipper instance. (we pass 'self' so we can create the screen in Flipper __init__())
 		self.flipper = Flipper(self)
+		# Creates a Ball instance. (we pass 'self' so we can create the screen in Flipper __init__())
+		self.ball = Ball(self)
 
 
 	def check_events(self):
@@ -44,6 +47,8 @@ class Game:
 		self.screen.fill(self.settings.screen_color)
 		# Blits the flipper on screen
 		self.flipper.blitme()
+		# Blits the ball on the screen
+		self.ball.blitme()
 		# Update the full display Surface to the screen
 		pygame.display.flip()
 
