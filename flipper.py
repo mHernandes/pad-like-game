@@ -22,9 +22,6 @@ class Flipper:
 		# Positions the flipper at 0.8 * screen height down below
 		self.rect.y = 650
 
-		# Creates a Settings instance
-		self.settings = Settings()
-
 		# Movement flag - when the right arrow key is pressed, we set the flag to True
 		self.moving_right = False
 		# Movement flag - when the left arrow key is pressed, we set the flag to True
@@ -36,11 +33,12 @@ class Flipper:
 
 	def update(self):
 		""" Updates the flipper's position """
-		if self.moving_right and (self.rect.right < self.settings.screen_width):
+		if self.moving_right and (self.rect.right < self.screen_rect.right):
 			self.rect.x += self.speed
 		if self.moving_left and (self.rect.left > 0):
 			self.rect.x -= self.speed
 
 
 	def blitme(self):
+		""" Blits the flipper on the screen """
 		self.screen.blit(self.flipper, self.rect)

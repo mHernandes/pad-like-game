@@ -1,5 +1,5 @@
 """
-
+What to do next: make the ball move around (look for bouncing ball), limit make the ball bounce, start the ball in a random place.
 """
 
 
