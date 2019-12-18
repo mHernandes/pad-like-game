@@ -58,6 +58,7 @@ class Game:
 		while True:
 			self.check_events()
 			self.flipper.update()
+			self.ball.update()
 			self.update_screen()
 
 

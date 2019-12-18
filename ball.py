@@ -1,6 +1,7 @@
 import pygame
 from pygame.sprite import Sprite
 from settings import Settings
+from random import randint
 
 
 class Ball(Sprite):
@@ -11,26 +12,32 @@ class Ball(Sprite):
 		super().__init__()
 		# Creates a Settings instance
 		self.settings = Settings()
-		# Assign the screen from pinball.py to Flipper in order to access it
+		# Assign the screen from pinball.py to Ball in order to blit the ball on it. See blitme()
 		self.screen = game.screen
-		# Get the screen
-		self.screen_rect = self.screen.get_rect()
 
 		# Creates the surface - ball size defined in settings.py
 		self.ball = pygame.Surface((self.settings.ball_size))
 		# Get the ball's rect
 		self.rect = self.ball.get_rect()
-		# Set the ball's center to the screen's center. We will initialize the ball on a random spot later
-		self.rect.center = self.screen_rect.center
+		# Set the ball's center to a random position on the screen. x goes from 0 to the screen width, y goes from 0 to 1/3 screen height
+		self.x, self.y = (randint(0, self.settings.screen_width), randint(0, self.settings.screen_width / 3))
+		self.rect.center = (self.x, self.y)
 		# Add color to the ball - ball color defined in settings.py
 		self.ball.fill(self.settings.ball_color)
 
-		"""# Ball's velocity vector
-		self.position = (self.change.x, self.change.y) = (100, 100)"""
+		# Ball moving speed
+		self.speed = 0.5
+
+
+	def _check_edges(self):
+		pass
 
 
 	def update(self):
-		pass
+		""" Updates the ball position """
+		self.x += self.speed
+		self.y += self.speed
+		self.rect.center = (self.x, self.y)
 
 
 	def blitme(self):
