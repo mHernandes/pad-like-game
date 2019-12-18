@@ -14,6 +14,8 @@ class Ball(Sprite):
 		self.settings = Settings()
 		# Assign the screen from pinball.py to Ball in order to blit the ball on it. See blitme()
 		self.screen = game.screen
+		# Get the screen rect to check for screen edges
+		self.screen_rect = self.screen.get_rect()
 
 		# Creates the surface - ball size defined in settings.py
 		self.ball = pygame.Surface((self.settings.ball_size))
@@ -28,15 +30,25 @@ class Ball(Sprite):
 		# Ball moving speed
 		self.speed = 0.5
 
+		# Variables to change the ball direction
+		self.change_x = 1
+		self.change_y = 1
 
-	def _check_edges(self):
-		pass
+
+	def _check_screen_edges(self):
+		""" Checks for screen edges in order to invert the ball movement """
+		if self.x > self.screen_rect.right or self.x < self.screen_rect.left:
+			self.change_x *= -1
+		elif self.y < self.screen_rect.top or self.y > self.screen_rect.bottom:
+			self.change_y *= -1
 
 
 	def update(self):
 		""" Updates the ball position """
-		self.x += self.speed
-		self.y += self.speed
+		self._check_screen_edges()
+		# Moves the ball
+		self.x += self.speed * self.change_x
+		self.y += self.speed * self.change_y
 		self.rect.center = (self.x, self.y)
 
 
