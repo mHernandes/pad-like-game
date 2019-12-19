@@ -5,7 +5,7 @@ from settings import Settings
 class Flipper:
 	""" A Class to manage the flipper """
 
-	def __init__(self, game):
+	def __init__(self, game = None):
 		""" Initialize the flipper and set it to its starting position """
 		# Assign the screen from pinball.py to Flipper in order to access it
 		self.screen = game.screen

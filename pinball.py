@@ -1,5 +1,5 @@
 """
-What to do next: make the ball move around (look for bouncing ball), limit make the ball bounce, start the ball in a random place.
+What to do next: collision between the ball and the padler
 """
 
 
@@ -41,6 +41,12 @@ class Game:
 					self.flipper.moving_left = False
 
 
+	def check_collision(self):
+		""" Check for ball and flipper collisions """
+		if self.ball.rect.colliderect(self.flipper.rect):
+			self.ball.change_y *= -1
+
+
 	def update_screen(self):
 		""" Updates screen """
 		# Fill screen with color
@@ -59,6 +65,7 @@ class Game:
 			self.check_events()
 			self.flipper.update()
 			self.ball.update()
+			self.check_collision()
 			self.update_screen()
 
 
