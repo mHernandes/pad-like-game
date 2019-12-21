@@ -21,9 +21,8 @@ class Ball(Sprite):
 		self.ball = pygame.Surface((self.settings.ball_size))
 		# Get the ball's rect
 		self.rect = self.ball.get_rect()
-		# Set the ball's center to a random position on the screen. x goes from 0 to the screen width, y goes from 0 to 1/3 screen height
-		self.x, self.y = (randint(0, self.settings.screen_width), randint(0, self.settings.screen_width / 3))
-		self.rect.center = (self.x, self.y)
+		# Starts the ball
+		self.start_ball()
 		# Add color to the ball - ball color defined in settings.py
 		self.ball.fill(self.settings.ball_color)
 
@@ -35,17 +34,34 @@ class Ball(Sprite):
 		self.change_y = 1
 
 
+	def start_ball(self):
+		""" Set the ball to its starting position """
+		# Set the ball's center to a random position on the screen. x goes from 0 to the screen width, y goes from 0 to 1/3 screen height
+		self.x, self.y = (randint(0, self.settings.screen_width), randint(0, self.settings.screen_width / 3))
+		self.rect.center = (self.x, self.y)
+
+
 	def _check_screen_edges(self):
-		""" Checks for screen edges in order to invert the ball movement """
+		""" Checks for screen edges (right, left, top) in order to invert the ball movement """
 		if self.x > self.screen_rect.right or self.x < self.screen_rect.left:
 			self.change_x *= -1
-		elif self.y < self.screen_rect.top or self.y > self.screen_rect.bottom:
+		elif self.y < self.screen_rect.top:
 			self.change_y *= -1
+
+
+	def _bottom_hit(self):
+		""" Respond to the ball reaching the bottom  """
+		if self.rect.bottom >= self.screen_rect.bottom:
+			self.start_ball()
+			# Decreases number of lives left
+			self.settings.lives_left -= 1
+			print(self.settings.lives_left)
 
 
 	def update(self):
 		""" Updates the ball position """
 		self._check_screen_edges()
+		self._bottom_hit()
 		# Moves the ball
 		self.x += self.speed * self.change_x
 		self.y += self.speed * self.change_y

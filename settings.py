@@ -10,3 +10,6 @@ class Settings:
 		# Ball settings
 		self.ball_size = (self.ball_width, self.ball_height) = (10, 10)
 		self.ball_color = (255,0,255)
+
+		# Number of lives
+		self.lives_left = 3
