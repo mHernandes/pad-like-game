@@ -67,11 +67,12 @@ class Game:
 
 	def run_game(self):
 		""" Main loop of the game """
-		while self.game_over():
+		while True:
 			self.check_events()
-			self.flipper.update()
-			self.ball.update()
-			self.check_collision()
+			if self.settings.game_active:
+				self.flipper.update()
+				self.ball.update()
+				self.check_collision()
 			self.update_screen()
 
 

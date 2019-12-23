@@ -27,9 +27,6 @@ class Ball(Sprite):
 		# Add color to the ball - ball color defined in settings.py
 		self.ball.fill(self.settings.ball_color)
 
-		# Ball moving speed
-		self.speed = 1.5
-
 		# Variables to change the ball direction
 		self.change_x = 1
 		self.change_y = 1
@@ -51,15 +48,19 @@ class Ball(Sprite):
 
 
 	def _bottom_hit(self):
-		""" Respond to the ball reaching the bottom  """
+		""" Respond to the ball reaching the bottom. 
+		If the ball has reached the bottom more than 3 times, changes the game active state to False and the game stops"""
 		if self.rect.bottom >= self.screen_rect.bottom:
-			self._start_ball()
-			# Decreases number of lives left
-			self.settings.lives_left -= 1
-			# Debuging
-			print(self.settings.lives_left)
-			# Add delay after the ball reaches the bottom of the screen
-			sleep(0.5)
+			if self.settings.lives_left > 1:	
+				self._start_ball()
+				# Decreases number of lives left
+				self.settings.lives_left -= 1
+				# Debuging
+				print(self.settings.lives_left)
+				# Add delay after the ball reaches the bottom of the screen
+				sleep(0.5)
+			else:
+				self.settings.game_active = False
 
 
 	def update(self):
@@ -67,8 +68,8 @@ class Ball(Sprite):
 		self._check_screen_edges()
 		self._bottom_hit()
 		# Moves the ball
-		self.x += self.speed * self.change_x
-		self.y += self.speed * self.change_y
+		self.x += self.settings.ball_speed * self.change_x
+		self.y += self.settings.ball_speed * self.change_y
 		self.rect.center = (self.x, self.y)
 
 

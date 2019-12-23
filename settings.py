@@ -18,10 +18,10 @@ class Settings:
 		self.flipper_speed = 2.5
 
 		# Button settings
-		self.button_x, self.button_y = ()
+		"""self.button_x, self.button_y = ()
 		self.button_size = self.button_width, self.button_height = ()
 		self.button_color = ()
-		self.button_font = ('freesansbold.ttf',48)
+		self.button_font = ('freesansbold.ttf',48)"""
 
 		# Game settings
 		self.game_active = True
