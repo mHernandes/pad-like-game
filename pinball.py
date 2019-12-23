@@ -1,5 +1,5 @@
 """
-What to do next: fazer com que o jogo pare de funcionar depois de três vidas
+What to do next:
 """
 
 
