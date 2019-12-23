@@ -1,5 +1,5 @@
 """
-What to do next: collision between the ball and the padler
+What to do next: fazer com que o jogo pare de funcionar depois de três vidas
 """
 
 
@@ -59,9 +59,15 @@ class Game:
 		pygame.display.flip()
 
 
+	def game_over(self):
+		""" Runs the game while number of lives >= 0 """
+		if self.ball.settings.lives_left > 0:
+			return True
+
+
 	def run_game(self):
 		""" Main loop of the game """
-		while True:
+		while self.game_over():
 			self.check_events()
 			self.flipper.update()
 			self.ball.update()

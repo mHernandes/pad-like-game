@@ -2,6 +2,7 @@ import pygame
 from pygame.sprite import Sprite
 from settings import Settings
 from random import randint
+from time import sleep
 
 
 class Ball(Sprite):
@@ -22,19 +23,19 @@ class Ball(Sprite):
 		# Get the ball's rect
 		self.rect = self.ball.get_rect()
 		# Starts the ball
-		self.start_ball()
+		self._start_ball()
 		# Add color to the ball - ball color defined in settings.py
 		self.ball.fill(self.settings.ball_color)
 
 		# Ball moving speed
-		self.speed = 0.5
+		self.speed = 1.5
 
 		# Variables to change the ball direction
 		self.change_x = 1
 		self.change_y = 1
 
 
-	def start_ball(self):
+	def _start_ball(self):
 		""" Set the ball to its starting position """
 		# Set the ball's center to a random position on the screen. x goes from 0 to the screen width, y goes from 0 to 1/3 screen height
 		self.x, self.y = (randint(0, self.settings.screen_width), randint(0, self.settings.screen_width / 3))
@@ -52,10 +53,13 @@ class Ball(Sprite):
 	def _bottom_hit(self):
 		""" Respond to the ball reaching the bottom  """
 		if self.rect.bottom >= self.screen_rect.bottom:
-			self.start_ball()
+			self._start_ball()
 			# Decreases number of lives left
 			self.settings.lives_left -= 1
+			# Debuging
 			print(self.settings.lives_left)
+			# Add delay after the ball reaches the bottom of the screen
+			sleep(0.5)
 
 
 	def update(self):
