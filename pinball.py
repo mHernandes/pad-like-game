@@ -7,6 +7,7 @@ import sys, pygame
 from flipper import Flipper
 from settings import Settings
 from ball import Ball
+from button import Button
 
 
 class Game:
@@ -22,6 +23,8 @@ class Game:
 		self.flipper = Flipper(self)
 		# Creates a Ball instance. (we pass 'self' so we can create the screen in Flipper __init__())
 		self.ball = Ball(self)
+		# Creates a Button instance
+		self.play_button = Button(self)
 
 
 	def check_events(self):
@@ -29,6 +32,9 @@ class Game:
 		for event in pygame.event.get():
 			if event.type == pygame.QUIT:
 				sys.exit()
+			elif event.type == pygame.MOUSEBUTTONDOWN:
+				mouse_pos = pygame.mouse.get_pos()
+				self._check_play_button(mouse_pos)
 			elif event.type == pygame.KEYDOWN:
 				if event.key == pygame.K_RIGHT:
 					self.flipper.moving_right = True
@@ -47,6 +53,12 @@ class Game:
 			self.ball.change_y *= -1
 
 
+	def _check_play_button(self, mouse_pos):
+		""" Start a new game when the player presses Play """
+		if self.play_button.rect.collidepoint(mouse_pos):
+			self.settings.game_active = True
+
+
 	def update_screen(self):
 		""" Updates screen """
 		# Fill screen with color
@@ -55,6 +67,9 @@ class Game:
 		self.flipper.blitme()
 		# Blits the ball on the screen
 		self.ball.blitme()
+		# Blits the button on the screen if the game status is inactive (game_active is False)
+		if not self.settings.game_active:
+			self.play_button.blitme()
 		# Update the full display Surface to the screen
 		pygame.display.flip()
 
