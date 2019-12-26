@@ -10,7 +10,7 @@ class Button:
 		# Settings instance
 		self.settings = Settings()
 
-		# Assign the screen from pinball.py to Flipper in order to access it and get rect
+		# Assign the screen from pinball.py to Button in order to access it and get rect
 		self.screen = game.screen
 		self.screen_rect = self.screen.get_rect()
 

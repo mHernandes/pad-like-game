@@ -15,7 +15,7 @@ class Ball(Sprite):
 		self.settings = Settings()
 		# Assign the screen from pinball.py to Ball in order to blit the ball on it. See blitme()
 		self.screen = game.screen
-		# Get the screen rect to check for screen edges
+		# Get the screen rect
 		self.screen_rect = self.screen.get_rect()
 
 		# Creates the surface - ball size defined in settings.py
@@ -51,12 +51,12 @@ class Ball(Sprite):
 		""" Respond to the ball reaching the bottom. 
 		If the ball has reached the bottom more than 3 times, changes the game active state to False and the game stops"""
 		if self.rect.bottom >= self.screen_rect.bottom:
-			if self.settings.lives_left > 1:	
+			if self.settings.lives_left > 1:
 				self._start_ball()
 				# Decreases number of lives left
 				self.settings.lives_left -= 1
 				# Debuging
-				print(self.settings.lives_left)
+				# print(self.settings.lives_left)
 				# Add delay after the ball reaches the bottom of the screen
 				sleep(0.5)
 			else:

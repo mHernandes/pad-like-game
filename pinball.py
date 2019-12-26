@@ -8,6 +8,7 @@ from flipper import Flipper
 from settings import Settings
 from ball import Ball
 from button import Button
+from scoreboard import Scoreboard
 
 
 class Game:
@@ -25,6 +26,8 @@ class Game:
 		self.ball = Ball(self)
 		# Creates a Button instance
 		self.play_button = Button(self)
+		# Creates a Scoreboard instance
+		self.scoreboard = Scoreboard(self)
 
 
 	def check_events(self):
@@ -48,8 +51,11 @@ class Game:
 
 
 	def check_collision(self):
-		""" Check for ball and flipper collisions """
+		""" Check for ball and flipper collisions. Each time there's a collision, the score increases """
 		if self.ball.rect.colliderect(self.flipper.rect):
+			self.scoreboard.score += 1
+			# Debug
+			print(self.scoreboard.score)
 			self.ball.change_y *= -1
 
 
@@ -67,6 +73,8 @@ class Game:
 		self.flipper.blitme()
 		# Blits the ball on the screen
 		self.ball.blitme()
+		# Blits the scoreboard on the screen
+		self.scoreboard.blitme()
 		# Blits the button on the screen if the game status is inactive (game_active is False)
 		if not self.settings.game_active:
 			self.play_button.blitme()

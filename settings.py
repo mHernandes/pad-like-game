@@ -25,3 +25,4 @@ class Settings:
 		# Game settings
 		self.game_active = False
 		self.lives_left = 3
+		self.score = 0
