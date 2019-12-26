@@ -51,11 +51,11 @@ class Game:
 
 
 	def check_collision(self):
-		""" Check for ball and flipper collisions. Each time there's a collision, the score increases """
+		""" Check for ball and flipper collisions. Each time there's a collision, change ball movement and increase the current score """
 		if self.ball.rect.colliderect(self.flipper.rect):
-			self.scoreboard.score += 1
+			self.scoreboard.current_score += 1
 			# Debug
-			print(self.scoreboard.score)
+			print(self.scoreboard.current_score)
 			self.ball.change_y *= -1
 
 

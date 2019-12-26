@@ -10,8 +10,8 @@ class Scoreboard:
 		self.screen = game.screen
 		self.screen_rect = self.screen.get_rect()
 
-		# Initializes the score
-		self.score = 0
+		# Initializes the current game's score
+		self.current_score = 0
 
 		# Score and display
 		self.display_current_score()
@@ -20,11 +20,11 @@ class Scoreboard:
 	def display_current_score(self):
 		""" Display the current score on the screen """
 		# Score font
-		font = pygame.font.SysFont(None, 48)
+		self.font = pygame.font.SysFont(None, 48)
 		# Current score font color
-		self.current_score_font_color = (255,255,255)
+		self.current_score_font_color = (255, 0, 0)
 		# Renders the score
-		self.current_score_image = font.render(str(self.score), True, self.current_score_font_color)
+		self.current_score_image = self.font.render(str(self.current_score), True, self.current_score_font_color)
 		# Get the current score image's rect
 		self.current_score_rect = self.current_score_image.get_rect()
 		# Set the current score on top of the screen
@@ -33,4 +33,4 @@ class Scoreboard:
 
 	def blitme(self):
 		""" Blit the score onto the screen """
-		self.screen.blit(self.current_score_image, self.self.current_score_rect)
+		self.screen.blit(self.current_score_image, self.current_score_rect)
