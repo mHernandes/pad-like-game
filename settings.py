@@ -10,7 +10,7 @@ class Settings:
 		# Ball settings
 		self.ball_size = (self.ball_width, self.ball_height) = (10, 10)
 		self.ball_color = (255,0,255)
-		self.ball_speed = 1.5
+		self.ball_speed = 1.0
 
 		# Flipper settings
 		self.flipper_size = (self.flipper_width, self.flipper_height) = (100, 20)

@@ -74,12 +74,6 @@ class Game:
 		pygame.display.flip()
 
 
-	def game_over(self):
-		""" Runs the game while number of lives >= 0 """
-		if self.ball.settings.lives_left > 0:
-			return True
-
-
 	def run_game(self):
 		""" Main loop of the game """
 		while True:
