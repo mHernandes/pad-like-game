@@ -54,8 +54,8 @@ class Game:
 		""" Check for ball and flipper collisions. Each time there's a collision, change ball movement and increase the current score """
 		if self.ball.rect.colliderect(self.flipper.rect):
 			self.scoreboard.current_score += 1
-			# Debug
-			print(self.scoreboard.current_score)
+			# calls display_current_score() scoreboard's method to update the variable 
+			self.scoreboard.display_current_score()
 			self.ball.change_y *= -1
 
 

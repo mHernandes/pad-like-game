@@ -1,4 +1,5 @@
 import pygame
+from settings import Settings
 
 
 class Scoreboard:
@@ -13,6 +14,9 @@ class Scoreboard:
 		# Initializes the current game's score
 		self.current_score = 0
 
+		# Settings instance
+		self.settings = Settings()
+
 		# Score and display
 		self.display_current_score()
 
@@ -21,10 +25,8 @@ class Scoreboard:
 		""" Display the current score on the screen """
 		# Score font
 		self.font = pygame.font.SysFont(None, 48)
-		# Current score font color
-		self.current_score_font_color = (255, 0, 0)
 		# Renders the score
-		self.current_score_image = self.font.render(str(self.current_score), True, self.current_score_font_color)
+		self.current_score_image = self.font.render("Current score: " + str(self.current_score), True, self.settings.current_score_font_color)
 		# Get the current score image's rect
 		self.current_score_rect = self.current_score_image.get_rect()
 		# Set the current score on top of the screen

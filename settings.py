@@ -22,7 +22,9 @@ class Settings:
 		self.button_color = (100, 100, 100)
 		self.text_color = (255, 255, 255)
 
+		# Scoreboard settings
+		self.current_score_font_color = (255, 0, 0)
+
 		# Game settings
 		self.game_active = False
 		self.lives_left = 3
-		self.score = 0
