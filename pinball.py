@@ -1,5 +1,12 @@
 """
-What to do next:
+Pendências: fazer com que, mesmo se o arquivo txt estiver vazio, o jogo não pare; depois que as três vidas acabam, é possível movimentar o pad;
+
+"""
+
+
+"""
+What to do next: encontrar uma maneira de salvar a pontuação do jogo em uma file. Em seguida, encontrar uma maneira de salvar
+a pontuação do jogo caso seja mais alta que a anterior. Mostrar ambas as pontuações na tela
 """
 
 
@@ -54,9 +61,14 @@ class Game:
 		""" Check for ball and flipper collisions. Each time there's a collision, change ball movement and increase the current score """
 		if self.ball.rect.colliderect(self.flipper.rect):
 			self.scoreboard.current_score += 1
-			# calls display_current_score() scoreboard's method to update the variable 
+			# calls display_current_score() to update the current score to the screen 
 			self.scoreboard.display_current_score()
 			self.ball.change_y *= -1
+
+			# Check for high score
+			self.scoreboard.check_highest_score()
+			# Calls display_highest_score() to update the high score to the screen
+			self.scoreboard.display_highest_score()
 
 
 	def _check_play_button(self, mouse_pos):

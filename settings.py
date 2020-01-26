@@ -23,7 +23,7 @@ class Settings:
 		self.text_color = (255, 255, 255)
 
 		# Scoreboard settings
-		self.current_score_font_color = (255, 0, 0)
+		self.score_font_color = (255, 0, 0)
 
 		# Game settings
 		self.game_active = False

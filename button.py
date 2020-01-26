@@ -7,7 +7,7 @@ class Button:
 
 	def __init__(self, game):
 		""" Initializes the Class """
-		# Settings instance
+		# Settings instances
 		self.settings = Settings()
 
 		# Assign the screen from pinball.py to Button in order to access it and get rect
