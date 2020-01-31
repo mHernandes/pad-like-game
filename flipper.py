@@ -15,8 +15,9 @@ class Flipper:
 		# Settings instance
 		self.settings = Settings()
 
-		# Flipper's size and positioning
+		# Flipper's size, color and rect
 		self.flipper = pygame.Surface((self.settings.flipper_size))
+		self.flipper.fill(self.settings.flipper_color)
 		self.rect = self.flipper.get_rect()
 		# Matches the center of the flipper's rect to the center of screen's rect
 		self.rect.center = self.screen_rect.center

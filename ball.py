@@ -3,6 +3,7 @@ from pygame.sprite import Sprite
 from settings import Settings
 from random import randint
 from time import sleep
+from scoreboard import Scoreboard
 
 
 class Ball(Sprite):
@@ -18,6 +19,9 @@ class Ball(Sprite):
 		# Get the screen rect
 		self.screen_rect = self.screen.get_rect()
 
+		# Creates a Scoreboard instance
+		self.scoreboard = Scoreboard(self)
+
 		# Creates the surface - ball size defined in settings.py
 		self.ball = pygame.Surface((self.settings.ball_size))
 		# Get the ball's rect
@@ -30,6 +34,9 @@ class Ball(Sprite):
 		# Variables to change the ball direction
 		self.change_x = 1
 		self.change_y = 1
+
+		# Help variable to use as parameter in display_lives_left()
+		self.lives = 3
 
 
 	def _start_ball(self):
@@ -55,8 +62,10 @@ class Ball(Sprite):
 				self._start_ball()
 				# Decreases number of lives left
 				self.settings.lives_left -= 1
-				# Debuging
-				# print(self.settings.lives_left)
+				# Decrease number of lives left to update in display_lives_left()
+				self.lives -= 1
+				# Update the number of lives left on screen
+				self.scoreboard.display_lives_left(self.lives)
 				# Add delay after the ball reaches the bottom of the screen
 				sleep(0.5)
 			else:

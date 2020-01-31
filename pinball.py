@@ -6,9 +6,11 @@ movimentar o pad; refactor the code
 
 
 """
-What to do next: tirar o current e highest score da tela antes enquanto o estado do jogo ainda não estiver active; depois de 'play', colocar uma contagem
-de 3..2..1 na tela. Criar uma tela de End Game. Depois das três vidas, printar Game Over na tela e um "deseja jogar de novo?" Teremos que criar uma função
-que reinicia os parâmetros
+What to do next: 
+2 - Criar uma tela de End Game. Depois das três vidas, printar Game Over na tela e um "deseja jogar de novo?" Teremos que criar uma função
+que reinicia os parâmetros. Remover a vida restante da  tela
+Ou só end game. if number of lives = 0, game_active = False print("game over")
+3 - Refactor the code
 """
 
 
@@ -18,6 +20,7 @@ from settings import Settings
 from ball import Ball
 from button import Button
 from scoreboard import Scoreboard
+from time import sleep
 
 
 class Game:
@@ -65,8 +68,8 @@ class Game:
 			self.scoreboard.current_score += 1
 			# calls display_current_score() to update the current score to the screen 
 			self.scoreboard.display_current_score()
+			# Inverts the ball direction
 			self.ball.change_y *= -1
-
 			# Check for high score
 			self.scoreboard.check_highest_score()
 			# Calls display_highest_score() to update the high score to the screen
@@ -87,9 +90,10 @@ class Game:
 		self.flipper.blitme()
 		# Blits the ball on the screen
 		self.ball.blitme()
-		# Blits the scoreboard on the screen
+		# Blits the scoreboard on the screen only if settings.game_active is True
 		if self.settings.game_active:
 			self.scoreboard.blitme()
+			self.scoreboard.display_lives_left(self.ball.lives)
 		# Blits the button on the screen if the game status is inactive (game_active is False)
 		if not self.settings.game_active:
 			self.play_button.blitme()
