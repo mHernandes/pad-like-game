@@ -1,12 +1,14 @@
 """
-Pendências: fazer com que, mesmo se o arquivo txt estiver vazio, o jogo não pare; depois que as três vidas acabam, é possível movimentar o pad;
+Pendências: criar uma tela de fim; fazer com que, mesmo se o arquivo txt estiver vazio, o jogo não pare; depois que as três vidas acabam, é possível 
+movimentar o pad; refactor the code
 
 """
 
 
 """
-What to do next: encontrar uma maneira de salvar a pontuação do jogo em uma file. Em seguida, encontrar uma maneira de salvar
-a pontuação do jogo caso seja mais alta que a anterior. Mostrar ambas as pontuações na tela
+What to do next: tirar o current e highest score da tela antes enquanto o estado do jogo ainda não estiver active; depois de 'play', colocar uma contagem
+de 3..2..1 na tela. Criar uma tela de End Game. Depois das três vidas, printar Game Over na tela e um "deseja jogar de novo?" Teremos que criar uma função
+que reinicia os parâmetros
 """
 
 
@@ -86,7 +88,8 @@ class Game:
 		# Blits the ball on the screen
 		self.ball.blitme()
 		# Blits the scoreboard on the screen
-		self.scoreboard.blitme()
+		if self.settings.game_active:
+			self.scoreboard.blitme()
 		# Blits the button on the screen if the game status is inactive (game_active is False)
 		if not self.settings.game_active:
 			self.play_button.blitme()
