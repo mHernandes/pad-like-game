@@ -43,23 +43,16 @@ class Game:
 
 
 	def check_events(self):
-		""" Checks for key presses """
+		""" Checks for key presses events """
 		for event in pygame.event.get():
 			if event.type == pygame.QUIT:
 				sys.exit()
 			elif event.type == pygame.MOUSEBUTTONDOWN:
-				mouse_pos = pygame.mouse.get_pos()
-				self._check_play_button(mouse_pos)
+				self._check_mousebutton_down(event)
 			elif event.type == pygame.KEYDOWN:
-				if event.key == pygame.K_RIGHT:
-					self.flipper.moving_right = True
-				elif event.key == pygame.K_LEFT:
-					self.flipper.moving_left = True
+				self._check_keydown_events(event)
 			elif event.type == pygame.KEYUP:
-				if event.key == pygame.K_RIGHT:
-					self.flipper.moving_right = False
-				elif event.key == pygame.K_LEFT:
-					self.flipper.moving_left = False
+				self._check_keyup_events(event)
 
 
 	def check_collision(self):
@@ -80,6 +73,28 @@ class Game:
 		""" Start a new game when the player presses Play """
 		if self.play_button.rect.collidepoint(mouse_pos):
 			self.settings.game_active = True
+
+
+	def _check_keydown_events(self, event):
+		""" Check keydown events """
+		if event.key == pygame.K_RIGHT:
+			self.flipper.moving_right = True
+		elif event.key == pygame.K_LEFT:
+			self.flipper.moving_left = True		
+
+
+	def _check_keyup_events(self, event):
+		""" Check keyup events """
+		if event.key == pygame.K_RIGHT:
+			self.flipper.moving_right = False
+		elif event.key == pygame.K_LEFT:
+			self.flipper.moving_left = False
+
+
+	def _check_mousebutton_down(self, event):
+		""" Check mousebutton down """
+		mouse_pos = pygame.mouse.get_pos()
+		self._check_play_button(mouse_pos)
 
 
 	def update_screen(self):
